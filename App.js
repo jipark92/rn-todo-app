@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+import { StyleSheet, Text, View, Button, TextInput, ScrollView } from "react-native";
 import { useState, useEffect } from 'react'
 
 export default function App() {
@@ -12,13 +12,23 @@ export default function App() {
   console.log(todos)
 
   const deleteTask = (taskId) => {
-    const deletedTask = todos.filter((todo, i) => {
-      if (todo.id === taskId) {
-        return todo
-      }
-    })
-    console.log('test')
-    setTodos(deletedTask)
+
+    console.log('todosArray', todos)
+
+    // const deletedTask = todos.filter((todo, i) => {
+    //   if (todo.id === taskId) {
+    //     return todo
+    //   }
+    // })
+    // setTodos(deletedTask)
+
+    // let deletedTodos = []
+    // for (let i = 0; i < todos.length; i++) {
+    //   if (i === taskId) {
+    //     console.log('tests', todos)
+
+    //   }
+    // }
   }
   return (
     <View style={styles.appContainer}>
@@ -37,14 +47,17 @@ export default function App() {
       </View>
       <View style={styles.goalContainer}>
         <Text >List of Todos: </Text>
-        {todos.map((todo, i) => {
-          return (
-            <View key={i + "Todos"} style={styles.todoLists}>
-              <Text>{i}. {todo} </Text>
-              <Button title="delete" onPress={() => { deleteTask(i) }} />
-            </View>
-          )
-        })}
+        <ScrollView>
+          {todos.map((todo, i) => {
+            return (
+              <View key={i + "Todos"} style={styles.todoLists}>
+                <Text>{i}. {todo} </Text>
+                <Button title="delete" onPress={() => { deleteTask(i) }} />
+              </View>
+            )
+          })}
+        </ScrollView>
+
       </View>
     </View>
 
@@ -81,6 +94,7 @@ const styles = StyleSheet.create({
   },
   goalContainer: {
     width: "100%",
+    height: "90%",
     borderWidth: 2,
     borderColor: "black",
     padding: 5,

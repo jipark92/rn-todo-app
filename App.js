@@ -10,6 +10,16 @@ export default function App() {
 
   console.log(textInput)
   console.log(todos)
+
+  const deleteTask = (taskId) => {
+    const deletedTask = todos.filter((todo, i) => {
+      if (todo.id === taskId) {
+        return todo
+      }
+    })
+    console.log('test')
+    setTodos(deletedTask)
+  }
   return (
     <View style={styles.appContainer}>
       <View style={styles.inputContainer}>
@@ -31,7 +41,7 @@ export default function App() {
           return (
             <View key={i + "Todos"} style={styles.todoLists}>
               <Text>{i}. {todo} </Text>
-              <Button title="delete" />
+              <Button title="delete" onPress={() => { deleteTask(i) }} />
             </View>
           )
         })}
